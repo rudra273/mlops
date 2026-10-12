@@ -1,0 +1,21 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: resnet50
+  namespace: models
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: onnx
+        version: "1"
+      runtime: kserve-tritonserver
+      protocolVersion: v2
+      storageUri: gs://mlops-511108-models/triton
+      resources:
+        requests:
+          cpu: "1"
+          memory: 2Gi
+        limits:
+          cpu: "1"
+          memory: 3Gi
