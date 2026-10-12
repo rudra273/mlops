@@ -1,0 +1,11 @@
+# Run InferenceServices as plain Deployments/Services (no Knative/Istio) to save memory on small nodes.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inferenceservice-config
+  namespace: kserve
+data:
+  deploy: |-
+    {
+      "defaultDeploymentMode": "RawDeployment"
+    }
