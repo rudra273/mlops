@@ -1,9 +1,9 @@
 """Classify an image with the resnet50 model on Triton (V2 REST) via a local port-forward."""
-import json, sys, urllib.request
+import json, os, sys, urllib.request
 import numpy as np
 from PIL import Image
 
-BASE, MODEL = "http://localhost:8080", "resnet50"
+BASE, MODEL = os.environ.get("TRITON_URL", "http://localhost:8080"), "resnet50"
 MEAN = np.array([0.485, 0.456, 0.406], dtype=np.float32)
 STD = np.array([0.229, 0.224, 0.225], dtype=np.float32)
 

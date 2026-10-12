@@ -1,0 +1,15 @@
+# Public access via node external IPs (free; no cloud load balancer). Firewall rule is created with gcloud (see Makefile target `expose`).
+apiVersion: v1
+kind: Service
+metadata:
+  name: resnet50-public
+  namespace: models
+spec:
+  type: NodePort
+  selector:
+    app: isvc.resnet50-predictor
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      nodePort: 30080
